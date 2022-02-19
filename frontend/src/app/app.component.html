@@ -1,0 +1,74 @@
+<div class="container-fluid p-5">
+
+  <div class="card card-body">
+
+    <h3>User Table</h3>
+
+    <div class="row mt-3">
+      <div class="col-md-12 text-right">
+        <div class="btn-group" role="group">
+          <button class="btn btn-success"
+                  placement="top" ngbTooltip="Excel" (click)="downloadAsExcel()">
+            Export to Excel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-hover" cdk-table [dataSource]="dataSource">
+
+            <ng-container cdkColumnDef="userId">
+              <th cdk-header-cell *cdkHeaderCellDef>User ID</th>
+              <td cdk-cell *cdkCellDef="let element">{{element.userId}}</td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="appName">
+              <th cdk-header-cell *cdkHeaderCellDef>App Name</th>
+              <td cdk-cell *cdkCellDef="let element">{{element.appName}}</td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="lastLoginDate">
+              <th cdk-header-cell *cdkHeaderCellDef>Last Login Date</th>
+              <td cdk-cell *cdkCellDef="let element">{{element.lastLoginDate | date: 'dd-MM-yyyy hh:mm:ss'}}</td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="lastDataLoad">
+              <th cdk-header-cell *cdkHeaderCellDef>Last Data Load</th>
+              <td cdk-cell *cdkCellDef="let element">{{element.lastDataLoad}}</td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="email">
+              <th cdk-header-cell *cdkHeaderCellDef>Email</th>
+              <td cdk-cell *cdkCellDef="let element">{{element.email}}</td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="salesProfit">
+              <th cdk-header-cell *cdkHeaderCellDef>Sales Profit</th>
+              <td cdk-cell *cdkCellDef="let element">{{element.salesProfit}}</td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="itemQty">
+              <th cdk-header-cell *cdkHeaderCellDef>Item Qty</th>
+              <td cdk-cell *cdkCellDef="let element">{{element.itemQty}}</td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="amount">
+              <th cdk-header-cell *cdkHeaderCellDef>Amount</th>
+              <td cdk-cell *cdkCellDef="let element">{{element.amount}}</td>
+            </ng-container>
+
+            <tr cdk-header-row *cdkHeaderRowDef="this.columnList"></tr>
+            <tr cdk-row *cdkRowDef="let element; columns: this.columnList"></tr>
+
+          </table>
+          <p *ngIf="(dataSource | async)?.length == 0" class="text-center">No Data Found</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
